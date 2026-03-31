@@ -2,15 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>THE 5TH WAVE: UNIVERSAL EXTINCTION</title>
+    <title>THE 5TH WAVE: FINAL EXTINCTION</title>
     <style>
         body { background: black; color: #00ffcc; font-family: 'Courier New', monospace; text-align: center; margin: 0; overflow: hidden; height: 100vh; }
         #mothership { position: fixed; top: -400px; left: 10%; width: 80%; font-size: 200px; transition: 4s ease-out; z-index: 100; filter: drop-shadow(0 0 50px #00ffcc); }
         #asteroid { position: fixed; top: -200px; right: 10%; font-size: 100px; transition: 6s linear; z-index: 110; }
-        #log { position: fixed; top: 20px; left: 20px; width: 300px; background: rgba(255, 0, 0, 0.3); border: 2px solid red; text-align: left; padding: 15px; display: none; z-index: 500; color: white; }
+        #log { position: fixed; top: 20px; left: 20px; width: 300px; background: rgba(255,0,0,0.3); border: 2px solid red; text-align: left; padding: 15px; display: none; z-index: 500; color: white; }
         #stage { padding-top: 100px; position: relative; z-index: 10; transition: 5s ease-in-out; }
         .ensemble-box { border: 10px solid #ff00ff; box-shadow: 0 0 50px #ff00ff; display: inline-block; background: black; }
-        #tsunami { position: fixed; bottom: -100%; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, #000c1a, #004d99); z-index: 200; transition: bottom 4s ease-in; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; font-size: 40px; }
+        #tsunami { position: fixed; bottom: -100%; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, #000c1a, #004d99); z-index: 200; transition: bottom 4s ease-in; display: flex; align-items: center; justify-content: center; color: white; font-size: 40px; }
         #blackhole { position: fixed; top: 50%; left: 50%; width: 0; height: 0; background: radial-gradient(circle, #000, #4b0082, transparent); border-radius: 50%; transform: translate(-50%, -50%); z-index: 1000; transition: 6s ease-in; box-shadow: 0 0 100px #ff00ff; }
         #jumpscare { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; z-index: 9999; flex-direction: column; justify-content: center; align-items: center; }
         .shake { animation: shake 0.1s infinite; }
@@ -19,43 +19,55 @@
     </style>
 </head>
 <body>
+    <!-- APOCALYPSE ELEMENTS -->
     <div id="mothership">🛸</div>
     <div id="asteroid">☄️</div>
     <div id="blackhole"></div>
     <div id="log"><h2 style="color: red; margin: 0;">⚠️ ALIEN INVASION ⚠️</h2><hr><ul id="landmark-list" style="list-style: none; padding: 0; font-size: 14px;"></ul></div>
+    
     <div id="stage">
         <h1>GLOBAL CONCERT: TRIVANDRUM</h1>
- <div class="ensemble-box">
-   <img src="https://giphy.com" 
-   width="700" height="400" alt="Indian Classical Ensemble">
-</div>
-
-
+        <div class="ensemble-box">
+             <img src="https://giphy.com" width="700" height="400" alt="Musicians">
         </div><br><br>
         <button id="activate" style="padding: 30px 60px; background: red; color: white; font-size: 30px; font-weight: bold; border: none; cursor:pointer; border-radius: 100px; box-shadow: 0 0 30px red;">ACTIVATE THE 5TH WAVE</button>
     </div>
+
     <div id="tsunami"><h1>🌊 20-METER WAVE HITS TRIVANDRUM 🌊</h1></div>
     <div id="jumpscare"><h1 style="color: black; font-size: 150px; margin: 0;">SYSTEM CRITICAL</h1><p style="color: red; font-size: 50px;">BROCCOLI IS THE END</p></div>
+
+    <!-- THE SOUNDS -->
+    <audio id="alienDrone" src="https://soundjay.com"></audio>
+    <audio id="tsunamiRoar" src="https://soundjay.com"></audio>
+    <audio id="blackHoleCrunch" src="https://soundjay.com"></audio>
     <audio id="scareSound" src="https://myinstants.com"></audio>
 
     <script>
-        const landmarks = ["Mount Everest: BURIED 🏔️", "London Bridge: FALLEN 🌉", "Eiffel Tower: MELTED 🗼", "Statue of Liberty: SUNK 🗽", "Great Wall: SHATTERED 🧱", "Universe: COLLAPSING 🌌"];
+        const landmarks = ["Everest: BURIED 🏔️", "London Bridge: FALLEN 🌉", "Eiffel Tower: MELTED 🗼", "Liberty: SUNK 🗽", "Great Wall: SHATTERED 🧱", "Universe: COLLAPSING 🌌"];
         const btn = document.getElementById('activate');
         const wave = document.getElementById('tsunami');
         const stage = document.getElementById('stage');
         const jump = document.getElementById('jumpscare');
         const ship = document.getElementById('mothership');
         const asteroid = document.getElementById('asteroid');
-        const log = document.getElementById('log');
-        const list = document.getElementById('landmark-list');
         const hole = document.getElementById('blackhole');
+        const list = document.getElementById('landmark-list');
+        const log = document.getElementById('log');
+
+        const drone = document.getElementById('alienDrone');
+        const roar = document.getElementById('tsunamiRoar');
+        const crunch = document.getElementById('blackHoleCrunch');
         const scream = document.getElementById('scareSound');
 
         btn.onclick = function() {
             btn.style.display = "none";
             log.style.display = "block";
+            
+            // 1. Alien Ship and Drone Sound
             ship.style.top = "50px"; 
             asteroid.style.top = "110%"; 
+            drone.play();
+
             landmarks.forEach((place, index) => {
                 setTimeout(() => {
                     let li = document.createElement('li');
@@ -63,18 +75,25 @@
                     list.prepend(li);
                 }, index * 1000);
             });
+
+            // 2. Tsunami and Ocean Roar
             setTimeout(() => {
                 wave.style.bottom = "0"; 
                 stage.classList.add('shake');
+                roar.play();
             }, 5000);
+
+            // 3. Black Hole and Vibration Sound
             setTimeout(() => {
-                hole.style.width = "4000px"; 
-                hole.style.height = "4000px";
-                stage.classList.add('collapse');
-                wave.classList.add('collapse');
-                ship.classList.add('collapse');
+                drone.pause(); roar.pause();
+                crunch.play();
+                hole.style.width = "4000px"; hole.style.height = "4000px";
+                stage.classList.add('collapse'); wave.classList.add('collapse'); ship.classList.add('collapse');
             }, 9000);
+
+            // 4. THE JUMPSCARE
             setTimeout(() => {
+                crunch.pause();
                 scream.play();
                 jump.style.display = "flex";
                 setInterval(() => { jump.style.backgroundColor = (jump.style.backgroundColor === 'white' ? 'black' : 'white'); }, 40);
@@ -83,3 +102,5 @@
     </script>
 </body>
 </html>
+
+   
