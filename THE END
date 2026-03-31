@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>OCTO-BROCCOLI: THE UNIVERSAL END</title>
+    <style>
+        body { background: black; color: #00ffcc; font-family: 'Courier New', monospace; text-align: center; margin: 0; overflow: hidden; height: 100vh; }
+        
+        /* 1. THE ALIEN MOTHERSHIP */
+        #mothership { position: fixed; top: -400px; left: 10%; width: 80%; font-size: 200px; transition: 4s ease-out; z-index: 100; filter: drop-shadow(0 0 50px #00ffcc); }
+
+        /* 2. THE ASTEROID */
+        #asteroid { position: fixed; top: -200px; right: 10%; font-size: 100px; transition: 6s linear; z-index: 110; }
+
+        /* 3. GLOBAL DESTRUCTION LOG */
+        #log { position: fixed; top: 20px; left: 20px; width: 300px; background: rgba(255, 0, 0, 0.3); border: 2px solid red; text-align: left; padding: 15px; display: none; z-index: 500; color: white; }
+
+        /* 4. THE INDIAN CLASSICAL STAGE */
+        #stage { padding-top: 100px; position: relative; z-index: 10; transition: 5s ease-in-out; }
+        .ensemble-box { border: 10px solid #ff00ff; box-shadow: 0 0 50px #ff00ff; display: inline-block; background: black; }
+
+        /* 5. THE 20-METER TSUNAMI */
+        #tsunami { position: fixed; bottom: -100%; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, #000c1a, #004d99); z-index: 200; transition: bottom 4s ease-in; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; font-size: 50px; text-shadow: 0 0 20px blue; }
+
+        /* 6. UNIVERSAL BLACK HOLE */
+        #blackhole { position: fixed; top: 50%; left: 50%; width: 0; height: 0; background: radial-gradient(circle, #000, #4b0082, transparent); border-radius: 50%; transform: translate(-50%, -50%); z-index: 1000; transition: 6s ease-in; box-shadow: 0 0 100px #ff00ff; }
+
+        /* 7. FINAL JUMPSCARE */
+        #jumpscare { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; z-index: 9999; flex-direction: column; justify-content: center; align-items: center; }
+
+        /* ANIMATIONS */
+        .shake { animation: shake 0.1s infinite; }
+        @keyframes shake { 0% { transform: translate(7px, 7px); } 50% { transform: translate(-7px, -7px); } }
+        .collapse { transform: scale(0) rotate(720deg); opacity: 0; }
+    </style>
+</head>
+<body>
+
+    <div id="mothership">🛸</div>
+    <div id="asteroid">☄️</div>
+    <div id="blackhole"></div>
+
+    <div id="log">
+        <h2 style="color: red; margin: 0;">⚠️ ALIEN INVASION ⚠️</h2>
+        <hr>
+        <ul id="landmark-list" style="list-style: none; padding: 0; font-size: 14px;"></ul>
+    </div>
+
+    <div id="stage">
+        <h1>GLOBAL CONCERT: TRIVANDRUM</h1>
+        <p>Sitar • Tabla • Mridangam • Veena • Thampuru • Flute • Violin</p>
+        <div class="ensemble-box">
+             <iframe width="700" height="400" src="https://youtube.com" frameborder="0"></iframe>
+        </div>
+        <br><br>
+        <button id="activate" style="padding: 30px 60px; background: red; color: white; font-size: 30px; font-weight: bold; border: none; cursor:pointer; border-radius: 100px; box-shadow: 0 0 30px red;">ACTIVATE THE 5TH WAVE</button>
+    </div>
+
+    <div id="tsunami">
+        <h1>🌊 20-METER WAVE HITS TRIVANDRUM 🌊</h1>
+        <p>THE CITY IS GONE</p>
+    </div>
+
+    <div id="jumpscare">
+        <h1 style="color: black; font-size: 150px; margin: 0;">SYSTEM CRITICAL</h1>
+        <p style="color: red; font-size: 50px;">BROCCOLI IS THE END</p>
+    </div>
+
+    <!-- SOUNDS -->
+    <audio id="scareSound" src="https://myinstants.com"></audio>
+
+    <script>
+        const landmarks = [
+            "Mount Everest: BURIED 🏔️",
+            "London Bridge: FALLEN 🌉",
+            "Eiffel Tower: MELTED 🗼",
+            "Statue of Liberty: SUNK 🗽",
+            "Great Wall: SHATTERED 🧱",
+            "Universe: COLLAPSING 🌌"
+        ];
+
+        const btn = document.getElementById('activate');
+        const wave = document.getElementById('tsunami');
+        const stage = document.getElementById('stage');
+        const jump = document.getElementById('jumpscare');
+        const ship = document.getElementById('mothership');
+        const asteroid = document.getElementById('asteroid');
+        const log = document.getElementById('log');
+        const list = document.getElementById('landmark-list');
+        const hole = document.getElementById('blackhole');
+        const scream = document.getElementById('scareSound');
+
+        btn.onclick = function() {
+            btn.style.display = "none";
+            log.style.display = "block";
+            
+            // 1. Alien Ship descends + Asteroid falls
+            ship.style.top = "50px"; 
+            asteroid.style.top = "110%"; 
+
+            // 2. Landmarks destroyed one by one
+            landmarks.forEach((place, index) => {
+                setTimeout(() => {
+                    let li = document.createElement('li');
+                    li.innerHTML = "<b>[LOST]</b> " + place;
+                    list.prepend(li);
+                }, index * 1000);
+            });
+
+            // 3. Tsunami hits the duet/ensemble
+            setTimeout(() => {
+                wave.style.bottom = "0"; 
+                stage.classList.add('shake');
+            }, 5000);
+
+            // 4. Universe Ends (Black Hole)
+            setTimeout(() => {
+                hole.style.width = "4000px"; 
+                hole.style.height = "4000px";
+                stage.classList.add('collapse');
+                wave.classList.add('collapse');
+                ship.classList.add('collapse');
+            }, 9000);
+
+            // 5. THE FINAL JUMPSCARE
+            setTimeout(() => {
+                scream.play();
+                jump.style.display = "flex";
+                setInterval(() => {
+                    jump.style.backgroundColor = (jump.style.backgroundColor === 'white' ? 'black' : 'white');
+                }, 40);
+            }, 13000);
+        };
+    </script>
+</body>
+</html>
